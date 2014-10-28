@@ -24,7 +24,7 @@ public class HttpHandler {
 
         } catch (Exception e)
         {
-                return "error"+e;
+                return "El servidor no esta encendido "+e;
         }
     }
 
