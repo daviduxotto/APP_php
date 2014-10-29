@@ -14,4 +14,27 @@
         android:layout_height="wrap_content"
         android:id="@+id/TextTexto" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activar Alarma"
+        android:id="@+id/botonActivar"
+        android:layout_below="@+id/TextTexto"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="95dp"
+        android:enabled="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Desactivar Alarma"
+        android:id="@+id/botonDesactivar"
+
+        android:layout_alignTop="@+id/botonActivar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
