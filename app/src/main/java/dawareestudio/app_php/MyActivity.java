@@ -6,16 +6,20 @@ import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 
 
 public class MyActivity extends Activity {
 
-    //declaraciones de objetos
+    /*declaraciones de objetos*/
     private Button btnactivar;
     private Button btndesactivar;
-
+    private WebView mWebView;
+    private Button btncamara;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +45,13 @@ public class MyActivity extends Activity {
 
         btnactivar = (Button)findViewById(R.id.botonActivar);
         btndesactivar = (Button)findViewById(R.id.botonDesactivar);
+        btncamara = (Button)findViewById(R.id.botonCamara);
         //eventos
         btnactivar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TextView t = (TextView)findViewById(R.id.TextTexto);
+                t.setText("Alarma Activada");
                 btndesactivar.setEnabled(true);
                 btnactivar.setEnabled(false);
             }
@@ -53,10 +60,35 @@ public class MyActivity extends Activity {
         btndesactivar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TextView t = (TextView)findViewById(R.id.TextTexto);
+                t.setText("Alarma Desactivada");
                 btnactivar.setEnabled(true);
                 btndesactivar.setEnabled(false);
             }
         });
+
+        btncamara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //activar webview
+                // INI AGREGADO
+                mWebView = (WebView) findViewById(R.id.webView3);
+                // Activamos Javascript
+                WebSettings webSettings = mWebView.getSettings();
+                webSettings.setJavaScriptEnabled(true);
+                // Url que carga la app (webview)
+                mWebView.loadUrl("http://192.168.1.50");
+                // Forzamos el webview para que abra los enlaces internos dentro de la la APP
+                mWebView.setWebViewClient(new WebViewClient());
+                // Forzamos el webview para que abra los enlaces externos en el navegador
+                mWebView.setWebViewClient(new MyAppWebViewClient());
+                // FIN AGREGADO
+
+
+            }
+        });
+
+
 
     }
 
