@@ -11,7 +11,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import java.util.Timer;
+import java.util.TimerTask;
+import android.os.Handler;
 
 public class MyActivity extends Activity {
 
@@ -28,69 +31,77 @@ public class MyActivity extends Activity {
 
         StrictMode.setThreadPolicy(policy);
         //codigo para mostrar lo de php
-        HttpHandler handler = new HttpHandler();
-        String txt = handler.post("http://192.168.1.50/alarma/estado.php");
-        TextView t = (TextView)findViewById(R.id.TextTexto);
+        HttpHandler handlerh = new HttpHandler();
+        String txt = handlerh.post("http://daviduxotto.ddns.net/alarma/activo.php");
+        TextView t = (TextView) findViewById(R.id.TextTexto);
 
-        if(txt.equals("0\n"))
-        {
-            txt="Alarma Desactivada";
-        }
-        else
-        {
-            txt="Alarma activada";
+        if (txt.equals("0\n")) {
+            txt = "Alarma Desactivada";
+        } else {
+            txt = "Alarma activada";
+
         }
         t.setText(txt);
         // fin del codigo para mostrar lo de php
+        //subproceso
+        new Handler().postDelayed( new Runnable() {
+            @Override
+            public void run() {
 
-        btnactivar = (Button)findViewById(R.id.botonActivar);
-        btndesactivar = (Button)findViewById(R.id.botonDesactivar);
-        btncamara = (Button)findViewById(R.id.botonCamara);
+                Toast.makeText(getApplicationContext(),"Bienvenido Al sistema Ing. Bayron ",Toast.LENGTH_LONG).show();
+            }
+        },3000);
+
+        new Handler().postDelayed( new Runnable() {
+            @Override
+            public void run() {
+
+                Toast.makeText(getApplicationContext(),"El Local Esta Seguro ",Toast.LENGTH_LONG).show();
+            }
+        },7000);
+        // fin de proceso
+
+
+        btnactivar = (Button) findViewById(R.id.botonActivar);
+        btndesactivar = (Button) findViewById(R.id.botonDesactivar);
+        btncamara = (Button) findViewById(R.id.botonCamara);
         //eventos
         btnactivar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView t = (TextView)findViewById(R.id.TextTexto);
+                TextView t = (TextView) findViewById(R.id.TextTexto);
                 t.setText("Alarma Activada");
+                HttpHandler handlerh = new HttpHandler();
+                String txt = handlerh.post("http://daviduxotto.ddns.net/alarma/activar_alarma.php");
+
                 btndesactivar.setEnabled(true);
-                btnactivar.setEnabled(false);
+
             }
         });
 
         btndesactivar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView t = (TextView)findViewById(R.id.TextTexto);
+                TextView t = (TextView) findViewById(R.id.TextTexto);
                 t.setText("Alarma Desactivada");
+                HttpHandler handlerh = new HttpHandler();
+                String txt = handlerh.post("http://daviduxotto.ddns.net/alarma/desactivar_alarma.php");
                 btnactivar.setEnabled(true);
                 btndesactivar.setEnabled(false);
             }
         });
 
-        btncamara.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //activar webview
-                // INI AGREGADO
-                mWebView = (WebView) findViewById(R.id.webView3);
-                // Activamos Javascript
-                WebSettings webSettings = mWebView.getSettings();
-                webSettings.setJavaScriptEnabled(true);
-                // Url que carga la app (webview)
-                mWebView.loadUrl("http://192.168.1.50");
-                // Forzamos el webview para que abra los enlaces internos dentro de la la APP
-                mWebView.setWebViewClient(new WebViewClient());
-                // Forzamos el webview para que abra los enlaces externos en el navegador
-                mWebView.setWebViewClient(new MyAppWebViewClient());
-                // FIN AGREGADO
-
-
-            }
-        });
-
-
 
     }
+
+
+            //el delay
+
+
+
+
+
+
 
 
     @Override
