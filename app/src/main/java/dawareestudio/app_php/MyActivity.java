@@ -1,6 +1,8 @@
 package dawareestudio.app_php;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.Menu;
@@ -88,6 +90,15 @@ public class MyActivity extends Activity {
                 String txt = handlerh.post("http://daviduxotto.ddns.net/alarma/desactivar_alarma.php");
                 btnactivar.setEnabled(true);
                 btndesactivar.setEnabled(false);
+            }
+        });
+
+        btncamara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://daviduxotto.ddns.net:8081"));
+                startActivity(browserIntent);
             }
         });
 
