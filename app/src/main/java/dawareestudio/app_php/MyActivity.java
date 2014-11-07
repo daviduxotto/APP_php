@@ -36,11 +36,17 @@ public class MyActivity extends Activity {
         HttpHandler handlerh = new HttpHandler();
         String txt = handlerh.post("http://daviduxotto.ddns.net/alarma/activo.php");
         TextView t = (TextView) findViewById(R.id.TextTexto);
+        btnactivar = (Button) findViewById(R.id.botonActivar);
+        btndesactivar = (Button) findViewById(R.id.botonDesactivar);
+        btncamara = (Button) findViewById(R.id.botonCamara);
 
         if (txt.equals("0\n")) {
             txt = "Alarma Desactivada";
+            btnactivar.setEnabled(true);
+
         } else {
             txt = "Alarma activada";
+            btndesactivar.setEnabled(true);
 
         }
         t.setText(txt);
@@ -64,9 +70,7 @@ public class MyActivity extends Activity {
         // fin de proceso
 
 
-        btnactivar = (Button) findViewById(R.id.botonActivar);
-        btndesactivar = (Button) findViewById(R.id.botonDesactivar);
-        btncamara = (Button) findViewById(R.id.botonCamara);
+
         //eventos
         btnactivar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +81,7 @@ public class MyActivity extends Activity {
                 String txt = handlerh.post("http://daviduxotto.ddns.net/alarma/activar_alarma.php");
 
                 btndesactivar.setEnabled(true);
+                btnactivar.setEnabled(false);
 
             }
         });

@@ -24,7 +24,7 @@
         android:text="Activar Alarma"
         android:id="@+id/botonActivar"
 
-        android:enabled="true"
+        android:enabled="false"
         android:layout_below="@+id/TextTexto"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -38,18 +38,10 @@
 
 
         android:layout_alignTop="@+id/botonActivar"
-        android:layout_alignRight="@+id/webView3"
-       />
-
-    <WebView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/webView3"
-        android:layout_gravity="center_vertical"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-       />
+        android:layout_marginRight="44dp"
+        android:enabled="false" />
 
     <Button
         android:layout_width="wrap_content"
@@ -60,6 +52,16 @@
 
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Power By:\n David Velasquez \n Fabio Oregel \n Luis Velasquez \n Alejandro de Leon"
+        android:id="@+id/textView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="97dp" />
 
 
 </RelativeLayout>
